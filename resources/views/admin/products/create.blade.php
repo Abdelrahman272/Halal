@@ -86,7 +86,7 @@
                             <input type="file" class="custom-file-input" name="photos[]" multiple>
                             <label class="custom-file-label">Choose file...</label>
                         </div>
-                        @error('photo')
+                        @error('photos')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>

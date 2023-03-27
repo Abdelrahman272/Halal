@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -87,9 +88,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        $categories = Category::all();
-        return view('admin.products.edit', compact('product', 'categories'));
+        $product = Product::with('category')->findOrFail($id);
+        // $categories = Category::all();
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
@@ -99,9 +100,39 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        if (!$request->has('status')) {
+            $request->request->add(['status' => 'inactive']);
+        } else {
+            $request->request->add(['status' => 'active']);
+        }
+
+        $inputs = $request->all();
+
+        if ($request->has('photo')) {
+
+            $old_photo = $product->photoable()->first()->src;
+
+            if(File::exists($old_photo)) {
+                
+                File::delete($old_photo);
+            }
+
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+            $file->move('uploads/products', $fileName);
+            $product->photoable()->first()->update([
+                'src' => 'uploads/products/' . $fileName,
+            ]);
+        }
+
+        $product->update($inputs);
+
+        return redirect()->route('product.index')->with('success', 'Product updated!');
     }
 
     /**

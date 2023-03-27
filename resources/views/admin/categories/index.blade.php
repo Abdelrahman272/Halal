@@ -18,16 +18,22 @@
 
 @section('content')
     <!-- Page Heading -->
-    @section('content')
-    @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
+@section('content')
+
+
     <div class="card-body">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <a href="{{ route('category.create') }}"
-                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <a href="{{ route('category.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                 New Category
             </a>
         </div>
@@ -56,8 +62,7 @@
                                     View
                                 </a>
 
-                                <a href="{{ route('category.edit', $category->id) }}"
-                                    class="btn btn-sm btn-warning">
+                                <a href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-warning">
                                     Edit
                                 </a>
 

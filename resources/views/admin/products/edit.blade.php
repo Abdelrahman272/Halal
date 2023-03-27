@@ -25,18 +25,18 @@
     <!-- Page Heading -->
     <div class="card-body">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Categories</h1>
+            <h1 class="h3 mb-0 text-gray-800">Product</h1>
 
             <a href="{{ route('product.index') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                Back to cateogries
+                Back to Product
             </a>
         </div>
 
         <!-- DataTales Example -->
-        <form action="{{ route('product.update', $product->id)}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
-            <input name="id" value="{{$product->id}}" type="hidden">
+            <input name="id" value="{{ $product->id }}" type="hidden">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">
@@ -55,40 +55,67 @@
 
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{ $product->description}}</textarea>
+                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{ $product->description }}</textarea>
                         @error('description')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label>Photo</label>
+                        <label>Categories</label>
+                        <select class="form-control" name="category_id">
+                            @inject('categories', 'App\Models\Category')
+                            @foreach ($categories::all() as $category)
+                                <option value="{{ $category->id }}" @if ($category->id == $product->category->id) selected @endif>
+                                    {{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="text" name="price" class="form-control" value="{{ $product->price }}">
+                        @error('price')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label>Photos</label>
                         <div class="custom-file mb-3">
-                            <input type="file" class="custom-file-input" name="photo">
+                            <input type="file" class="custom-file-input" name="photos[]" multiple>
                             <label class="custom-file-label">Choose file...</label>
                         </div>
-                        <div class="form-group">
-                            <div class="text-center">
-                                <img src="{{ renderImage($product) }}" class="rounded-circle  height-150"
-                                    style="width: 200px; alt="صورة القسم ">
+                        @error('photos')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <div class="text-center">
+                            <img src="{{ renderImage($product) }}" class="rounded-circle  height-150"
+                                style="width: 200px; alt="صورة القسم ">
+                                        </div>
                                     </div>
+                                    @error('photo')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
-                                @error('photo')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="status"  @if ($product->status == 'active') checked @endif>Active
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="status"  @if ($product->status == 'active') checked @endif>Active
-                                </label>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </div>
-                </form>
-            </div>
+                    </form>
+                </div>
 @endsection
 
 @section('scripts')

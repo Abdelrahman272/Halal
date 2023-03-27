@@ -128,7 +128,13 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
-        $photo = $category->photoable()->first()->src;
+
+        $products = $category->products();
+        if (isset($products) && $products->count() > 0) {
+            return redirect()->route('category.index')->with(['error' => 'Can not delete this category because it has products']);
+        }
+        
+        $photo = $category->photoable()->first();
         if (File::exists($photo))
         {
             File::delete($photo);
