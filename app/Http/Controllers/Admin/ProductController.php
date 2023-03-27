@@ -55,10 +55,11 @@ class ProductController extends Controller
             {
                 $filename = now()->timestamp . '_' . $photo->getClientOriginalName();
                 $filePath = "uploads/products/" . $filename;
+                $photo->move('uploads/products', $filename);
 
                 Photo::create([
-                    'src' => $request->file('photo')->move('uploads/products', $filePath),
-                    'photoable_type' => 'App\Models\Category',
+                    'src' => $filePath,
+                    'photoable_type' => 'App\Models\Product',
                     'photoable_id' => $newProduct->id,
                     'type' => 'photo',
                 ]);
@@ -86,7 +87,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $categories = Category::all();
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**

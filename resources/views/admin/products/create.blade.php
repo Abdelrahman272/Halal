@@ -28,7 +28,7 @@
         </div>
 
         <!-- DataTales Example -->
-        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Category</label>
+                        <label>Categories</label>
                         <select class="form-control" name="category_id">
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -74,14 +74,14 @@
 
                     <div class="form-group">
                         <label>Price</label>
-                        <input type="number" name="price" class="form-control @error('price') is-invalid @enderror">
+                        <input type="text" name="price" class="form-control" value="0">
                         @error('price')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label>Photo</label>
+                        <label>Photos</label>
                         <div class="custom-file mb-3">
                             <input type="file" class="custom-file-input" name="photos[]" multiple>
                             <label class="custom-file-label">Choose file...</label>
