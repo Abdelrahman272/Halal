@@ -18,10 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('phone_number');
-            $table->double('latitude')->nullable();
-            $table->double('longitude')->nullable();
-            $table->foreignId('photo');
+            $table->foreignId('photo')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

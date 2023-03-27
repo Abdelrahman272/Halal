@@ -17,6 +17,10 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    'admin' => [
+        'guard' => 'admin',
+        'passwords' => 'admins',
+    ],
 
     /*
     |--------------------------------------------------------------------------

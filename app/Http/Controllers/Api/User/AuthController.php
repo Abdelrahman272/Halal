@@ -12,7 +12,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:4',
+            'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
         ]);
@@ -20,7 +20,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password) //set in model
+            'password' => $request->password //set in model
         ]);
 
         return response()->json(['user' => $user], 200);
@@ -33,10 +33,6 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        // if (!auth()->attempt($data)) {
-        //     return response(['error_message' => 'Incorrect Details.
-        //     Please try again']);
-        // }
         $user = User::where('email', $request->email)->first();
         if(!$user) {
             return response(['error_message' => 'Incorrect Details.
