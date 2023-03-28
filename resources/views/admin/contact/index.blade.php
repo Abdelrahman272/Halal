@@ -1,24 +1,25 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Products
+    Contacts
 @endsection
 
 @section('css')
 @endsection
 
 @section('title_page1')
-    Products
+    Contacts
 @endsection
 
 @section('title_page2')
-    Products
+    Contacts
 @endsection
 
 
 @section('content')
     <!-- Page Heading -->
 @section('content')
+
 
     <div class="card-body">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -32,8 +33,8 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <a href="{{ route('product.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                New Product
+            <a href="{{ route('contact.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                Add Contacts
             </a>
         </div>
         <div class="table-responsive">
@@ -42,30 +43,24 @@
             <table id="myTable">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Photo</th>
-                        <th>Status</th>
-                        <th>Discription</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>WhatsApp</th>
+                        <th>Facebook</th>
+                        <th>Instagram</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                @forelse ($products as $product)
+                @forelse ($contacts as $contact)
                     <tr>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $product->category->name }}</td>
-                        <td>{{ $product->price }}</td>
-                        <td><img src="{{ renderImage($product) }}" style="width: 200px;" /></td>
-                        <td>{{ $product->getActive() }}</td>
-                        <td>{{ Str::limit($product->description, 30) }}</td>
+                        <td>{{ $contact->email }}</td>
+                        <td>{{ $contact->phone_number }}</td>
+                        <td>{{ $contact->whatsApp}}</td>
+                        <td>{{ $contact->facebook }}</td>
+                        <th>{{$contact->instagram}}</th>
                         <td>
-                            <form action="{{ route('product.destroy', $product->id) }}" method="POST">
-                                <a href="{{ route('product.show', $product->id) }}" class="btn btn-sm btn-info">
-                                    View
-                                </a>
-
-                                <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-warning">
+                            <form action="{{ route('contact.destroy', $contact->id) }}" method="POST">
+                                <a href="{{ route('contact.edit', $contact->id) }}" class="btn btn-sm btn-warning">
                                     Edit
                                 </a>
 
@@ -86,7 +81,6 @@
                 @endforelse
             </table>
         </div>
-        {{ $products->links() }}
     </div>
 @endsection
 

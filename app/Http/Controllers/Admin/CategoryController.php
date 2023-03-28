@@ -133,7 +133,7 @@ class CategoryController extends Controller
         if (isset($products) && $products->count() > 0) {
             return redirect()->route('category.index')->with(['error' => 'Can not delete this category because it has products']);
         }
-        
+
         $photo = $category->photoable()->first();
         if (File::exists($photo))
         {

@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('phone_number');
             $table->string('email');
-            $table->integer('whatsapp');
-            $table->string('facebook');
-            $table->string('instagram');
+            $table->integer('whatsApp')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
             $table->timestamps();
         });
     }

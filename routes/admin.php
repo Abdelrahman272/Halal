@@ -1,8 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\AskController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,11 +36,49 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
 //======================== end Products =================================================================
 
+
+
 //======================== Start Products =================================================================
 
 Route::resource('product', ProductController::class);
 
 //======================== end Categories =================================================================
+
+
+
+//======================== Start City =================================================================
+
+Route::resource('city', CityController::class);
+
+//======================== end City =================================================================
+
+
+
+//======================== Start policy =================================================================
+
+Route::resource('policy', PolicyController::class);
+
+//======================== end policy =================================================================
+
+
+//======================== Start About us =================================================================
+
+Route::resource('contact', ContactController::class);
+
+//======================== end About us =================================================================
+
+
+//======================== Start Asks =================================================================
+
+Route::get('ask', [AskController::class, 'index'])->name('ask.index');
+
+//======================== end Asks =================================================================
+
+//======================== Start Asks =================================================================
+
+Route::resource('account', AccountController::class);
+
+//======================== end Asks =================================================================
 });
 
 //======================== Start Login =================================================================

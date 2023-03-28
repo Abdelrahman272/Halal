@@ -1,18 +1,18 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    الرئيسية
+    Dashboard
 @endsection
 
 @section('css')
 @endsection
 
 @section('title_page1')
-    الرئيسية
+    Dahboard
 @endsection
 
 @section('title_page2')
-    لوحة التحكم
+Dahboard
 @endsection
 
 @section('content')

@@ -52,8 +52,7 @@ class ProductController extends Controller
         $newProduct = Product::create($inputs);
 
         if ($request->hasFile('photos')) {
-            foreach ($request->file('photos') as $photo)
-            {
+            foreach ($request->file('photos') as $photo) {
                 $filename = now()->timestamp . '_' . $photo->getClientOriginalName();
                 $filePath = "uploads/products/" . $filename;
                 $photo->move('uploads/products', $filename);
@@ -112,22 +111,22 @@ class ProductController extends Controller
 
         $inputs = $request->all();
 
-        if ($request->has('photo')) {
-
+        if ($request->hasFile('photos')) {
             $old_photo = $product->photoable()->first()->src;
 
-            if(File::exists($old_photo)) {
-                
+            if (File::exists($old_photo)) {
+
                 File::delete($old_photo);
             }
+            foreach ($request->file('photos') as $photo) {
+                $filename = now()->timestamp . '_' . $photo->getClientOriginalName();
+                $filePath = "uploads/products/" . $filename;
+                $photo->move('uploads/products', $filename);
 
-            $file = $request->file('photo');
-            $extension = $file->getClientOriginalExtension();
-            $fileName = time() . '.' . $extension;
-            $file->move('uploads/products', $fileName);
-            $product->photoable()->first()->update([
-                'src' => 'uploads/products/' . $fileName,
-            ]);
+                $product->photoable()->first()->update([
+                    'src' => 'uploads/products/' . $filename,
+                ]);
+            }
         }
 
         $product->update($inputs);
@@ -143,6 +142,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $photo = $product->photoable()->first();
+        if (File::exists($photo)) {
+            File::delete($photo);
+        }
+        $product->delete();
+        return redirect()->route('product.index')->with('success', 'Product deleted!');
     }
 }

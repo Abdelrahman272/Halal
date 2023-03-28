@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('AccuntNumber');
-            $table->integer('IBAN');
+            $table->bigInteger('AccuntNumber');
+            $table->bigInteger('IBAN');
             $table->timestamps();
         });
     }
