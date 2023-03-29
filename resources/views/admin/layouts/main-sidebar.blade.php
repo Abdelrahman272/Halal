@@ -98,7 +98,7 @@
                 </li>
                   <li class="nav-item">
                       <a href="{{ route('admin.destroy') }}" class="nav-link">
-                          <i class="nav-icon fas fa-columns"></i>
+                        <i class="far fa-arrow-alt-circle-left"></i>
                           <p>
                               Logout
                           </p>

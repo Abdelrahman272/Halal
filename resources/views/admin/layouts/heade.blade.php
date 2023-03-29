@@ -20,6 +20,7 @@
  <!-- summernote -->
  <link rel="stylesheet" href="{{asset('assets/plugins/summernote/summernote-bs4.min.css')}}">
 
+
  <style>
     #myInput {
   background-image: url('/css/searchicon.png'); /* Add a search icon to input */

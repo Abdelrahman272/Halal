@@ -33,13 +33,8 @@
             </div>
         @endif
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <a href="{{ route('category.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                New Category
-            </a>
-
-            <a href="{{ route('category.trash') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-archive"></i>
-                Category Trashed
+            <a href="{{ route('category.index') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                Back To Category
             </a>
         </div>
         <div class="table-responsive">
@@ -62,18 +57,17 @@
                         <td>{{ $category->getActive() }}</td>
                         <td>{{ Str::words($category->description, 5) }}</td>
                         <td>
-                            <form action="{{ route('category.destroy', $category->id) }}" method="POST">
-                                <a href="{{ route('category.show', $category->id) }}" class="btn btn-sm btn-info">
-                                    View
-                                </a>
-
-                                <a href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-warning">
-                                    Edit
-                                </a>
-
+                            <form action="{{ route('category.restore', $category->id) }}" method="post">
                                 @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                @method('put')
+                                <button type="submit" class="btn btn-sm btn-outline-info">Restore</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{{ route('category.force-delete', $category->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Force Delete</button>
                             </form>
                         </td>
                     </tr>

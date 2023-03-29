@@ -134,13 +134,36 @@ class CategoryController extends Controller
             return redirect()->route('category.index')->with(['error' => 'Can not delete this category because it has products']);
         }
 
+        $category->delete();
+        return redirect()->route('category.index')->with('success', 'Category deleted!');
+    }
+
+    public function trash()
+    {
+        $categories = Category::onlyTrashed()->paginate(10);
+        return view('admin.categories.trash', compact('categories'));
+    }
+
+    public function restore(Request $request, $id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->restore();
+
+        return redirect()->route('category.trash')->with('success', 'Category restored!');
+    }
+
+    public function forceDelete($id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->forceDelete();
+
         $photo = $category->photoable()->first();
         if (File::exists($photo))
         {
             File::delete($photo);
         }
-        $category->delete();
-        return redirect()->route('category.index')->with('success', 'Category deleted!');
+
+        return redirect()->route('category.trash')->with('success', 'Category deleted forever!');
     }
 
 }
