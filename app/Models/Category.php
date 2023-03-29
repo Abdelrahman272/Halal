@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\CategoryObserver;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,12 @@ class Category extends Model
     protected $fillable = [
         'name', 'description', 'status'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        Category::observe(CategoryObserver::class);
+    }
 
     public function products()
     {

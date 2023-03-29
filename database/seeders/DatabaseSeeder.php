@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(AdminSeeder::class);
-        Category::factory(10)->create();
-        Product::factory(20)->create();
+        Category::factory(5)->create();
+        Product::factory(30)->create();
         Photo::factory(20)->create();
 
     }
