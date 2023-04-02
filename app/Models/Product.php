@@ -49,4 +49,9 @@ class Product extends Model
             $product->save();
         });
     }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

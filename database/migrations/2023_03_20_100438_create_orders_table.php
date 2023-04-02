@@ -15,12 +15,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('phone_Number');
-            $table->enum('payment', ['active', 'inactive'])->default('active');
-            $table->foreignId('city_id')->references('id')->on('cities')->onDelete('cascade');
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('status')->default('pending');
+            $table->decimal('total', 8, 2);
             $table->timestamps();
         });
     }

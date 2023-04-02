@@ -9,10 +9,24 @@ class Cart extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','price','product_id', 'quantity'];
+    protected $fillable = [
+        'user_id', 'product_id',
+    ];
 
-    public function products()
+    public function user()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function getTotalAttribute()
+    {
+        return $this->items->sum(function ($item) {
+            return $item->quantity * $item;
+        });
     }
 }
