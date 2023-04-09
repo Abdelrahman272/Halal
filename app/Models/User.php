@@ -67,5 +67,10 @@ class User extends Authenticatable
         return $this->belongsTo(Order::class);
     }
 
+    public function coupons()
+    {
+        return $this->belongsToMany(Coupon::class);
+    }
+
 
 }

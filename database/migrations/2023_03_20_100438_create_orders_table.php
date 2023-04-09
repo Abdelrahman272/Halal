@@ -16,8 +16,17 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->string('status')->default('pending');
-            $table->decimal('total', 8, 2);
+            $table->foreignId('coupon_id')->nullable()->constrained()->onDelete('set null');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('phone');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->decimal('total')->default(0);
+            $table->decimal('discount')->default(0);
+            $table->string('status')->default('new');
+            $table->string('payment_method')->default('cash_on_delivery');
+            $table->string('payment_status')->default('pending');
             $table->timestamps();
         });
     }

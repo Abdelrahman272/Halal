@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AskController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\PolicyController;
@@ -80,6 +81,13 @@ Route::group(['middleware' => 'auth:admin'], function () {
     //======================== Start Asks =================================================================
 
     Route::resource('account', AccountController::class);
+
+    //======================== end Asks =================================================================
+
+
+    //======================== Start Asks =================================================================
+
+    Route::resource('coupon', CouponController::class);
 
     //======================== end Asks =================================================================
 });

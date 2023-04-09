@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CartRequest;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Order;
@@ -27,7 +28,7 @@ class CartController extends Controller
     }
 
 
-    public function addToCart(Request $request)
+    public function addToCart(CartRequest $request)
     {
         DB::beginTransaction();
 
@@ -61,7 +62,7 @@ class CartController extends Controller
     }
 
 
-    public function updateItem(Request $request, $id)
+    public function updateItem(CartRequest $request, $id)
     {
         $cartItem = CartItem::findOrFail($id);
         $productPrice = Product::findOrFail($cartItem->product_id);

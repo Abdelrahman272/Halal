@@ -19,16 +19,8 @@ class Order extends Model
     // const PAYMENT_PAYPAL = 2;
 
     protected $fillable = [
-        'status',
-        'payment_status',
-        'payment_method',
-        'address',
-        'notes',
-        'subtotal',
-        'vat',
-        'total',
-        'user_id',
-        'coupon_id',
+        'status','payment_status','payment_method','address','notes','subtotal','vat','total',
+        'user_id','coupon_id','discount','first_name','last_name','phone','address','city'
     ];
 
     public function user()
@@ -36,9 +28,13 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot(['quantity', 'price', 'total']);
+    }
+
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
     }
 }
