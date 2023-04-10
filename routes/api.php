@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\ContactUsController;
+use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PolicyController;
 use App\Http\Controllers\Api\ProductController;
@@ -39,6 +40,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/cart/update-item/{id}', [CartController::class, 'updateItem']);
 
     Route::post('/checkout', [CheckoutController::class, 'checkout']);
+
+    Route::get('/locations', [LocationController::class, 'index']);
+    Route::post('/locations', [LocationController::class, 'store']);
+    Route::put('/locations/{location}', [LocationController::class, 'update']);
+    Route::delete('/locations/{location}', [LocationController::class, 'destroy']);
 
 });
 

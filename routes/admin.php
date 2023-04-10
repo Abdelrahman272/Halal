@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Admin\ProductController;
@@ -41,7 +42,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
     //======================== end Products =================================================================
 
 
-
     //======================== Start Products =================================================================
 
     Route::resource('product', ProductController::class);
@@ -49,13 +49,11 @@ Route::group(['middleware' => 'auth:admin'], function () {
     //======================== end Categories =================================================================
 
 
-
     //======================== Start City =================================================================
 
     Route::resource('city', CityController::class);
 
     //======================== end City =================================================================
-
 
 
     //======================== Start policy =================================================================
@@ -78,18 +76,26 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     //======================== end Asks =================================================================
 
-    //======================== Start Asks =================================================================
+
+    //======================== Start account =================================================================
 
     Route::resource('account', AccountController::class);
 
-    //======================== end Asks =================================================================
+    //======================== end account =================================================================
 
 
-    //======================== Start Asks =================================================================
+    //======================== Start coupon =================================================================
 
     Route::resource('coupon', CouponController::class);
 
-    //======================== end Asks =================================================================
+    //======================== end coupon =================================================================
+
+    
+    //======================== Start locations =================================================================
+
+    Route::resource('locations', LocationController::class);
+
+    //======================== end locations =================================================================
 });
 
 //======================== Start Login =================================================================

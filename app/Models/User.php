@@ -72,5 +72,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Coupon::class);
     }
 
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
 
 }

@@ -16,7 +16,7 @@
                   <img src="{{ asset('assets/img/logo.jpg') }}" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                  <a href="#" class="d-block">{{auth()->user()->name}}</a>
+                  <a href="#" class="d-block">{{ auth()->user()->name }}</a>
               </div>
           </div>
 
@@ -57,7 +57,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="{{ route('city.index')}}" class="nav-link">
+                      <a href="{{ route('city.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-columns"></i>
                           <p>
                               Cities
@@ -65,7 +65,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="{{ route('policy.index')}}" class="nav-link">
+                      <a href="{{ route('policy.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-columns"></i>
                           <p>
                               Polices
@@ -73,7 +73,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="{{route('contact.index')}}" class="nav-link">
+                      <a href="{{ route('contact.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-columns"></i>
                           <p>
                               Contact Us
@@ -81,7 +81,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="{{route('ask.index')}}" class="nav-link">
+                      <a href="{{ route('ask.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-columns"></i>
                           <p>
                               Askes
@@ -89,24 +89,32 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('account.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-columns"></i>
-                        <p>
-                            Account
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('coupon.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-columns"></i>
-                        <p>
-                            Coupone
-                        </p>
-                    </a>
-                </li>
+                      <a href="{{ route('account.index') }}" class="nav-link">
+                          <i class="nav-icon fas fa-columns"></i>
+                          <p>
+                              Account
+                          </p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('coupon.index') }}" class="nav-link">
+                          <i class="nav-icon fas fa-columns"></i>
+                          <p>
+                              Coupone
+                          </p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('locations.index') }}" class="nav-link">
+                          <i class="nav-icon fas fa-columns"></i>
+                          <p>
+                              Our Location
+                          </p>
+                      </a>
+                  </li>
                   <li class="nav-item">
                       <a href="{{ route('admin.destroy') }}" class="nav-link">
-                        <i class="far fa-arrow-alt-circle-left"></i>
+                          <i class="far fa-arrow-alt-circle-left"></i>
                           <p>
                               Logout
                           </p>
